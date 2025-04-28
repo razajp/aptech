@@ -13,7 +13,7 @@
     ];
 @endphp
 
-<div class="max-w-4xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8">
+<div class="max-w-4xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8 border">
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-[--text-color]">Receiving Student Fee</h2>
     </div>

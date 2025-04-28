@@ -10,7 +10,7 @@
         ['name' => 'IKHLAS AHMED', 'enroll' => '1507192', 'receipt' => '41319', 'against' => 'OV Charges', 'amount' => '4,000.00', 'date' => '2025-03-14', 'sro' => 'zainab'],
     ];
 @endphp
-<div class="max-w-7xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8 h-[50rem]">
+<div class="max-w-7xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8 h-[50rem] border">
 
     <div class="flex justify-between items-center mb-6">
         <h2 class="text-2xl font-semibold text-[--text-color]">Fee Received List</h2>
