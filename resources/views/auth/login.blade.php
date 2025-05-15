@@ -8,10 +8,10 @@
             @csrf
             <!-- User Name -->
             <x-input 
-                label="Email" 
-                name="email" 
-                id="email" 
-                placeholder="Confirm your user name" 
+                label="Username" 
+                name="username" 
+                id="username" 
+                placeholder="Enter your user name" 
                 required 
             />
 

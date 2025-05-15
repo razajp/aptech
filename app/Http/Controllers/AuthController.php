@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Illuminate\Contracts\Validation\Validator as ValidationValidator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -22,13 +23,13 @@ class AuthController extends Controller
             return redirect(route('home'))->with('warning', 'Oops! You’re already loged in. Please logut first!');
         } else {
             // Validate the input
-            $request->validate([
-                'email' => 'required|string', // email field validation
+            $validator = Validator::make($request->all(), [
+                'username' => 'required|string', // username field validation
                 'password' => 'required',        // Password field validation
             ]);
 
-            // Attempt to find the user by email
-            $user = User::where('email', $request->email)->first();
+            // Attempt to find the user by username
+            $user = User::where('username', $request->username)->first();
 
             // Check if user exists and if the password matches the hash
             if ($user && Hash::check($request->password, $user->password)) {
@@ -38,11 +39,11 @@ class AuthController extends Controller
 
             // If authentication fails, return error message but do not keep the password in session
             if (!$user) {
-                return redirect('login')->withErrors(['email' => 'Invalid email'])
-                    ->withInput($request->only('email'));
+                return redirect('login')->withErrors(['username' => 'Invalid username'])
+                    ->withInput($request->only('username'));
             } else {
                 return redirect('login')->withErrors(['password' => 'Invalid password'])
-                    ->withInput($request->only('email'));
+                    ->withInput($request->only('username'));
             }
         }
     }

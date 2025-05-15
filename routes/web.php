@@ -3,6 +3,7 @@
 use App\Http\Controllers\AttendanceController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\FeeController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,8 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fetchLogs', [AttendanceController::class, 'fetchLogs']);
     
     
-    Route::get('receiving-fee', [FeeController::class,'receivingFee'])->name('receivingFee');
-    Route::get('fee-list', [FeeController::class,'feeList'])->name('feeList');
+    Route::get('receiving-fee', [EmployeeController::class,'receivingFee'])->name('receivingFee');
+    Route::get('employee-list', [EmployeeController::class,'employeeList'])->name('employeeList');
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

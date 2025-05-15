@@ -10,10 +10,9 @@ class ZKTecoService
 
     public function __construct()
     {
-        $deviceIp = '192.168.0.102'; // Change to your device IP
-        $devicePort = 4370; // Default ZKTeco port
+        $deviceIp = '192.168.100.125'; // Change to your device IP
 
-        $this->zk = new ZKTeco($deviceIp, $devicePort);
+        $this->zk = new ZKTeco($deviceIp);
     }
 
     public function connect()
@@ -27,6 +26,16 @@ class ZKTecoService
     public function getAttendanceLogs()
     {
         return $this->zk->getAttendance(); // Fetch logs
+    }
+
+    public function clearAttendance()
+    {
+        return $this->zk->clearAttendance(); // Fetch logs
+    }
+
+    public function getUsers()
+    {
+        return $this->zk->getUser(); // Fetch logs
     }
 
     public function disconnect()

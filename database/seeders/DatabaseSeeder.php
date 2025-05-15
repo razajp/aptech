@@ -15,6 +15,7 @@ class DatabaseSeeder extends Seeder
         DB::table('users')->updateOrInsert(
             [
                 'name' => 'hasan',
+                'username' => 'hasan',
                 'email' => 'hasan@gmail.com',
                 'password' => '$2y$12$V6SBN1THQHkTbhGarfCk1eArE5Mye2FkOjHLgAmbubQXQlQNMSZSe',
             ],
