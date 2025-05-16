@@ -18,35 +18,22 @@ class AttendanceController extends Controller
         $zk = new ZKTecoService;
         
         if ($zk) {
-            $zk->connect();
-            $allUsers = $zk->getUsers();
-
-            foreach ($allUsers as $user) {
-                // Check if employee already exists by uid
-                $employee = Employee::where('empid', $user['userid'])->first();
-
-                if (!$employee) {
-                    // If not found, create new employee
-                    $employee = new Employee();
-                    $employee->empid = $user['userid'];
-                    $employee->name = $user['name'];
-                    $employee->password = $user['password'];
-                    $employee->save();
-                }
-            }
-
-            $allEmployees = Employee::all();    
+            $zk->connect();   
 
             $allAttendance = $zk->getAttendanceLogs();
 
             foreach ($allAttendance as $data) {
                 if ($data) {
-                    $attendance = new Attendance();
-                    $attendance->empid = $data['id'];
-                    $attendance->state = $data['state'];
-                    $attendance->timestamp = $data['timestamp'];
-                    $attendance->type = $data['type'];
-                    $attendance->save();
+                    $employeeExists = Employee::where('empid', $data['id'])->exists();
+
+                    if ($employeeExists) {
+                        $attendance = new Attendance();
+                        $attendance->empid = $data['id'];
+                        $attendance->state = $data['state'];
+                        $attendance->timestamp = $data['timestamp'];
+                        $attendance->type = $data['type'];
+                        $attendance->save();
+                    }
                 }
             }
 
@@ -57,7 +44,7 @@ class AttendanceController extends Controller
             $allAttendanceDB = Attendance::all();   
 
             $zk->disconnect();
-            return response()->json(['data' => $allAttendanceDB]);
+            return response()->json(['data' => $allAttendance]);
         } 
 
         return redirect()->route('home');

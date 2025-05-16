@@ -30,10 +30,8 @@ Route::group(['middleware' => 'auth'], function () {
     })->name('home');
     
     Route::get('fetchLogs', [AttendanceController::class, 'fetchLogs']);
-    
-    
-    Route::get('receiving-fee', [EmployeeController::class,'receivingFee'])->name('receivingFee');
-    Route::get('employee-list', [EmployeeController::class,'employeeList'])->name('employeeList');
+
+    Route::resource('employees', EmployeeController::class);
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });

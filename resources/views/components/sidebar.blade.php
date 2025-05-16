@@ -15,14 +15,9 @@
                 <span x-show="open">Home</span>
             </a>
 
-            <a href="{{ route('receivingFee') }}" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-300 transition">
-                <i class="fas fa-briefcase"></i>
-                <span x-show="open">Receiving Fee</span>
-            </a>
-
-            <a href="{{ route('employeeList') }}" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-300 transition">
-                <i class="fas fa-comments"></i>
-                <span x-show="open">Fee List</span>
+            <a href="{{ route('employees.index') }}" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-300 transition">
+                <i class="fas fa-users"></i>
+                <span x-show="open">Employees</span>
             </a>
         </nav>
 
