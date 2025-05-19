@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Employee Attendance | Payroll')
+@section('title', 'Employee List | Payroll')
 @section('content')
 
 <div id="modal"
@@ -17,7 +17,7 @@
                     <x-input label="Password" name="password" type="password" id="password" placeholder="Password"/>
                     <x-input label="Designation" name="designation" id="designation" placeholder="Designation"/>
                     <x-input label="Department" name="department" id="department" placeholder="Department"/>
-                    <x-input label="Joining_date" name="joining_date" id="joining_date" type="date" validateMin min="{{ now()->subDays('5')->toDateString() }}" validateMax max="{{ now()->toDateString() }}" />
+                    <x-input label="Joining_date" name="joining_date" id="joining_date" type="date" validateMin min="{{ now()->subMonth()->toDateString() }}" validateMax max="{{ now()->toDateString() }}" />
                     <div class="col-span-full">
                         <x-input label="Salary" name="salary" type="number" id="salary" placeholder="Salary"/>
                     </div>
@@ -42,7 +42,7 @@
 <div class="max-w-7xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8 h-[50rem] border">
 
     <div class="flex justify-between items-center mb-6">
-        <h2 class="text-2xl font-semibold text-[--text-color]">Employee Attendance List</h2>
+        <h2 class="text-2xl font-semibold text-[--text-color]">Employee List</h2>
         <button type="button" id="add-employee-btn" onclick="openModal()" class="bg-[--bg-success] text-[--text-success] font-medium border border-[--border-success] px-5 py-1.5 rounded-lg transition-all 0.3s ease-in-out hover:bg-[--h-bg-success]">Add Employee</button>
     </div>
 
@@ -59,7 +59,7 @@
     </div>
 
     <div class="flex justify-between my-4 px-4">
-        <span class="text-blue-500">5 Records</span>
+        <span class="text-blue-500">{{ $employees->count() }} Records</span>
         <span class="text-blue-500">Total Present: 14</span>
     </div>
 
@@ -67,11 +67,8 @@
         <div class="flex bg-[--h-bg-color] rounded-lg font-medium py-2 px-3">
             <div class="w-full">Employee Id</div>
             <div class="w-full">Employee Name</div>
-            <div class="w-full">Machine Name</div>
             <div class="w-full">Working Days</div>
             <div class="w-full">Off Days</div>
-            <div class="w-full">Holidays</div>
-            <div class="w-full">Leaves</div>
             <div class="w-full">PR</div>
             <div class="w-full">AB</div>
             <div class="w-[10%]">Detail</div>
@@ -85,14 +82,11 @@
                     data-month="{{ optional($employee->attendance->first())->date?->format('Y-m') ?? now()->format('Y-m') }}"
                 >
                 <span class="w-full">{{ $employee->empid ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->name }}</span>
-                    <span class="w-full">{{ $employee->machine_name ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->working_days ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->off_days ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->holidays ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->leaves ?? '-' }}</span>
-                    <span class="w-full">{{ $employee->attendance->count() }}</span>
-                    <span class="w-full">{{ $employee->ab ?? '-' }}</span>
+                    <span class="w-full">{{ $employee->name ?? '-' }}</span>
+                    <span class="w-full">{{ $employee->attendance()->count() ?? '-' }}</span>
+                    <span class="w-full">{{ $employee->attendance()->where('status', 'Off Day')->count() ?? '-' }}</span>
+                    <span class="w-full">{{ $employee->attendance()->where('status', 'Present')->count() ?? '-' }}</span>
+                    <span class="w-full">{{ $employee->attendance()->where('status', 'Absent')->count() ?? '-' }}</span>
                     <span class="w-[10%]">
                         <a href="{{ route('employees.show', $employee->id) }}" class="text-blue-500 hover:underline">
                             Detail

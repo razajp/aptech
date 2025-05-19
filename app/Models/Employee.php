@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Employee extends Model
 {
@@ -17,7 +18,7 @@ class Employee extends Model
         'password',
         'designation',
         'department',
-        'joining_date', 
+        'joining_date',
         'salary',
         'is_active',
     ];
@@ -32,7 +33,8 @@ class Employee extends Model
         'is_active' => 'boolean',
     ];
 
-    public function attendance() {
-        return $this->hasMany(Attendance::class, 'empid');
+    public function attendance(): HasMany
+    {
+        return $this->hasMany(Attendance::class, 'empid', 'empid');
     }
 }

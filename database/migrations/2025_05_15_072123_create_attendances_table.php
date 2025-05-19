@@ -14,13 +14,14 @@ return new class extends Migration
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('empid');
-            $table->integer('state');
-            $table->timestamp('timestamp');
-            $table->integer('type');
+            $table->date('date');
+            $table->timestamp('check_in')->nullable();
+            $table->timestamp('check_out')->nullable();
+            $table->string('status')->nullable();
             $table->timestamps();
 
-            $table->foreign('type_no')->references('type_no')->on('setups')->onDelete('cascade');
             $table->foreign('empid')->references('empid')->on('employees')->onDelete('cascade');
+            $table->unique(['empid', 'date']);
         });
     }
 

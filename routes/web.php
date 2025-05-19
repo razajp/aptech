@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('fetchLogs', [AttendanceController::class, 'fetchLogs']);
 
     Route::resource('employees', EmployeeController::class);
+    Route::resource('attendances', AttendanceController::class);
 
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
 });
