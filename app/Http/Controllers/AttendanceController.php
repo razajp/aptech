@@ -6,14 +6,11 @@ use App\Models\Attendance;
 use App\Models\Employee;
 use App\Services\ZKTecoService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class AttendanceController extends Controller
 {
-    public function index(Request $request) {
-        $allAttendance = Attendance::where('name', 'like', '%' . $request->input('search') . '%')
-            ->orderByDesc('date')
-            ->get();
+    public function index() {
+        $attendances = Attendance::with('employee')->get();
         return view('attendances.index', compact('attendances'));
     }
     /**

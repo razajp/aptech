@@ -19,6 +19,11 @@
                 <i class="fas fa-users"></i>
                 <span x-show="open">Employees</span>
             </a>
+
+            <a href="{{ route('attendances.index') }}" class="flex items-center space-x-4 p-3 rounded-lg hover:bg-gray-300 transition">
+                <i class="fas fa-clipboard-user"></i>
+                <span x-show="open">Attendances</span>
+            </a>
         </nav>
 
         <div class="p-2 border-t border-gray-500">

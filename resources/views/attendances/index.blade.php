@@ -27,21 +27,19 @@
 <div class="max-w-7xl mx-auto bg-[--secondary-bg-color] shadow-lg rounded-xl p-8 h-[50rem] border">
 
     <!-- Employee Details Box -->
-    <form action="{{ route('attendances.index') }}" method="POST" class="mb-6">
-        <div class="bg-[--h-bg-color] border border-gray-300 py-4 px-5 rounded-xl mb-4 flex items-end gap-5">
-            <div class="w-full grow">
-                <x-input label="Employee Name" name="employee_name" id="employee_name" placeholder="Enter Employee Name" />
-            </div>
-
-            <div class="w-full grow">
-                <x-input label="Month" name="month" id="month" type="month" />
-            </div>
-
-            <button type="submit" id="searchBtn" class="bg-blue-400 text-gray-100 font-medium px-6 py-2.5 rounded-lg border border-transparent transition-all 0.3s ease-in-out hover:bg-blue-500">
-                Search
-            </button>
+    <div class="bg-[--h-bg-color] border border-gray-300 py-4 px-5 rounded-xl mb-4 flex items-end gap-5">
+        <div class="w-full grow">
+            <x-input label="Employee Name" name="employee_name" id="employee_name" placeholder="Enter Employee Name" />
         </div>
-    </form>
+
+        <div class="w-full grow">
+            <x-input label="Month" name="month" id="month" type="month" />
+        </div>
+
+        <button type="button" id="searchBtn" class="bg-blue-400 text-gray-100 font-medium px-6 py-2.5 rounded-lg border border-transparent transition-all 0.3s ease-in-out hover:bg-blue-500">
+            Search
+        </button>
+    </div>
 
     <!-- Employee Summary Box -->
     <div class="bg-[--h-bg-color] border border-gray-300 py-4 px-5 rounded-xl mb-6 flex justify-between items-center">
